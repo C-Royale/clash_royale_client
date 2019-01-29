@@ -14,7 +14,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="clash_royale_client"
+        android:label="clash_royale_box"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
