@@ -20,6 +20,7 @@ class Navbar extends StatelessWidget {
             title: Text('首页'),
             onTap: () {
               // Navigator.of(context).pushNamed('/profile');
+              Navigator.of(context).pop();
               Navigator.of(context).push(new PageRouteBuilder(
                   pageBuilder: (BuildContext context, _, __) {
                 return new HomeState();
@@ -32,6 +33,7 @@ class Navbar extends StatelessWidget {
           ListTile(
             title: Text('个人战绩'),
             onTap: () {
+              Navigator.of(context).pop();
               Navigator.of(context).push(new PageRouteBuilder(
                   pageBuilder: (BuildContext context, _, __) {
                 return new Profile();
