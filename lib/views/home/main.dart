@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../navbar.dart';
 
-TabController _tabController;
-
 List tabs = ["概览", "卡组", "战绩"];
 
 class HomeState extends StatefulWidget {
@@ -13,11 +11,18 @@ class HomeState extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
-  
+  TabController _tabController;
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: tabs.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override

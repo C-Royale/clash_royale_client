@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './profile/main.dart';
-import './home/main.dart';
+import './clan/main.dart';
 
 class Navbar extends StatelessWidget {
   @override
@@ -17,41 +17,31 @@ class Navbar extends StatelessWidget {
                 backgroundColor: Colors.brown, child: new Text('TODO')),
           ),
           ListTile(
-            title: Text('首页'),
-            onTap: () {
-              // Navigator.of(context).pushNamed('/profile');
-              Navigator.of(context).pop();
-              Navigator.of(context).push(new PageRouteBuilder(
-                  pageBuilder: (BuildContext context, _, __) {
-                return new HomeState();
-              }, transitionsBuilder:
-                      (_, Animation<double> animation, __, Widget child) {
-                return new FadeTransition(opacity: animation, child: child);
-              }));
-            },
-          ),
-          ListTile(
             title: Text('个人战绩'),
+            trailing: new Icon(Icons.perm_identity),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(new PageRouteBuilder(
-                  pageBuilder: (BuildContext context, _, __) {
+              // Navigator.of(context).pushReplacementNamed('/profile');
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(builder: (BuildContext context) {
                 return new Profile();
-              }, transitionsBuilder:
-                      (_, Animation<double> animation, __, Widget child) {
-                return new FadeTransition(opacity: animation, child: child);
               }));
             },
           ),
           ListTile(
             title: Text('部落'),
+            trailing: new Icon(Icons.people),
             onTap: () {
-              // Update the state of the app
-              // ...
+              Navigator.of(context).pop();
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(builder: (BuildContext context) {
+                return new Clan();
+              }));
             },
           ),
           ListTile(
             title: Text('竞技场'),
+            trailing: new Icon(Icons.confirmation_number),
             onTap: () {
               // Update the state of the app
               // ...
@@ -59,6 +49,16 @@ class Navbar extends StatelessWidget {
           ),
           ListTile(
             title: Text('卡牌'),
+            trailing: new Icon(Icons.credit_card),
+            onTap: () {
+              // Update the state of the app
+              // ...
+            },
+          ),
+          new Divider(),
+          ListTile(
+            title: Text('设置'),
+            trailing: new Icon(Icons.settings),
             onTap: () {
               // Update the state of the app
               // ...
