@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../navbar.dart';
+import './battles.dart';
 
 List tabs = ["概览", "卡组", "战绩"];
 
@@ -36,12 +37,19 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
         ),
         body: TabBarView(
           controller: _tabController,
-          children: tabs.map((e) {
-            return Container(
+          children: [
+            Container(
               alignment: Alignment.center,
-              child: Text(e, textScaleFactor: 5),
-            );
-          }).toList(),
+              child: Text('概览', textScaleFactor: 5),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Text('卡组', textScaleFactor: 5),
+            ),
+            Container(
+              child: Battles(),
+            )
+          ],
         ),
         drawer: Navbar());
   }
