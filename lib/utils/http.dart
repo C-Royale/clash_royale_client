@@ -1,42 +1,88 @@
+import 'dart:async';
 import 'package:dio/dio.dart';
 
-class Http {
-  static Http instance;
-  static String token;
-  static Dio _dio;
-  Options _options;
+Options options = Options(
+  baseUrl: 'https://api.royaleapi.com',
+  connectTimeout: 5000,
+  receiveTimeout: 3000,
+  responseType: ResponseType.JSON,
+  headers: {
+    'auth':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjI5NSwiaWRlbiI6IjUzNzIyNjkzNDAyODA3NTAxMCIsIm1kIjp7InVzZXJuYW1lIjoibXk5MDc0Iiwia2V5VmVyc2lvbiI6MywiZGlzY3JpbWluYXRvciI6IjE3NTAifSwidHMiOjE1NDkzNzEwNTkyNzd9.ot4ofXr4jKIKgXqR0Mop0fHoJa5rpVMffjcoVvbLbB8'
+  },
+  extra: {"noInterceptor": false},
+);
 
-  static Http getInstance() {
-    print("getInstance");
-    if (instance == null) {
-      instance = new Http();
-    }
+class _Http {
+  Dio _dio;
+
+  _Http() {
+    _dio = Dio(options);
+    this.setInterceptor();
   }
 
-  Http() {
-    // 初始化 Options
-    _options = new Options(baseUrl: 'https://api.royaleapi.com', headers: {
-      'auth':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjI5NSwiaWRlbiI6IjUzNzIyNjkzNDAyODA3NTAxMCIsIm1kIjp7InVzZXJuYW1lIjoibXk5MDc0Iiwia2V5VmVyc2lvbiI6MywiZGlzY3JpbWluYXRvciI6IjE3NTAifSwidHMiOjE1NDkzNzEwNTkyNzd9.ot4ofXr4jKIKgXqR0Mop0fHoJa5rpVMffjcoVvbLbB8'
-    });
+  void handleError(DioError error) {
+    // DioErrorType errorType = error.type;
+    // String message = error.message;
+    print('ajax error...');
+  }
 
-    _dio = new Dio(_options);
-
-    //发送请求拦截处理，例如：添加token使用
+  void setInterceptor() {
     _dio.interceptor.request.onSend = (Options options) async {
-      print(options.baseUrl);
       return options;
     };
 
-    //请求成功拦截，简化代码中调用难度
-    _dio.interceptor.response.onSuccess = (Response response) async {
-      print(response.statusCode);
+    _dio.interceptor.response.onSuccess = (Response response) {
       return response;
     };
-    //请求失败拦截
-    _dio.interceptor.response.onError = (DioError e) {
-      print(e);
-      return e;
+
+    _dio.interceptor.response.onError = (DioError error) {
+      handleError(error);
+      return error;
     };
   }
+
+  void cancelDioInterceptor() {
+    _dio.interceptor.request.onSend = null;
+    _dio.interceptor.response.onSuccess = null;
+    _dio.interceptor.response.onError = null;
+  }
+
+  Future<Response> get(String url,
+          {dynamic data, Options options, CancelToken cancelToken}) =>
+      _dio.get(
+        url,
+        data: data,
+        options: options,
+        cancelToken: cancelToken,
+      );
+
+  Future<Response> post(String url,
+          {dynamic data, Options options, CancelToken cancelToken}) =>
+      _dio.post(
+        url,
+        data: data,
+        options: options,
+        cancelToken: cancelToken,
+      );
+
+  Future<Response> put(String url,
+          {dynamic data, Options options, CancelToken cancelToken}) =>
+      _dio.put(
+        url,
+        data: data,
+        options: options,
+        cancelToken: cancelToken,
+      );
+
+  Future<Response> delete(String url,
+          {dynamic data, Options options, CancelToken cancelToken}) =>
+      _dio.delete(
+        url,
+        data: data,
+        options: options,
+        cancelToken: cancelToken,
+      );
 }
+
+final _Http http = _Http();

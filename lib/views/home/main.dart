@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../navbar.dart';
 import './battles.dart';
+import '../../api/api.dart';
 
 List tabs = ["概览", "卡组", "战绩"];
 
@@ -40,7 +41,10 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
           children: [
             Container(
               alignment: Alignment.center,
-              child: Text('概览', textScaleFactor: 5),
+              child: RaisedButton(
+                child: Text("概览"),
+                onPressed: getVersion,
+              ),
             ),
             Container(
               alignment: Alignment.center,
