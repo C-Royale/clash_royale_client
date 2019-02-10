@@ -18,3 +18,11 @@ Future<Response> player(String id,
       data: data, options: options, cancelToken: cancelToken);
   return response;
 }
+
+// Player Battles
+Future<Response> playerBattles(String id,
+    {dynamic data, Options options, CancelToken cancelToken}) async {
+  Response response = await http.get('/player/$id/battles',
+      data: data, options: options, cancelToken: cancelToken);
+  return response;
+}
