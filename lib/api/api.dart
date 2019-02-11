@@ -26,3 +26,11 @@ Future<Response> playerBattles(String id,
       data: data, options: options, cancelToken: cancelToken);
   return response;
 }
+
+// Tournaments1k
+Future<Response> tournaments1k(
+    {dynamic data, Options options, CancelToken cancelToken}) async {
+  Response response = await http.get('/tournaments/1k',
+      data: data, options: options, cancelToken: cancelToken);
+  return response;
+}
