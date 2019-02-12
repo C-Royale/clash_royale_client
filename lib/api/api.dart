@@ -34,3 +34,19 @@ Future<Response> tournaments1k(
       data: data, options: options, cancelToken: cancelToken);
   return response;
 }
+
+// Player Chests
+Future<Response> playerChests(String id,
+    {dynamic data, Options options, CancelToken cancelToken}) async {
+  Response response = await http.get('/player/$id/chests',
+      data: data, options: options, cancelToken: cancelToken);
+  return response;
+}
+
+// Top 200 Players
+Future<Response> topPlayers(
+    {dynamic data, Options options, CancelToken cancelToken}) async {
+  Response response = await http.get('top/players',
+      data: data, options: options, cancelToken: cancelToken);
+  return response;
+}
