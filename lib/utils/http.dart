@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 
-Options options = Options(
+BaseOptions options = BaseOptions(
   baseUrl: 'https://api.royaleapi.com',
   connectTimeout: 5000,
   receiveTimeout: 3000,
-  responseType: ResponseType.JSON,
   headers: {
     'auth':
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjI5NSwiaWRlbiI6IjUzNzIyNjkzNDAyODA3NTAxMCIsIm1kIjp7InVzZXJuYW1lIjoibXk5MDc0Iiwia2V5VmVyc2lvbiI6MywiZGlzY3JpbWluYXRvciI6IjE3NTAifSwidHMiOjE1NDkzNzEwNTkyNzd9.ot4ofXr4jKIKgXqR0Mop0fHoJa5rpVMffjcoVvbLbB8'
@@ -28,58 +27,65 @@ class _Http {
   }
 
   void setInterceptor() {
-    _dio.interceptor.request.onSend = (Options options) async {
+    _dio.interceptors
+        .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
       return options;
-    };
-
-    _dio.interceptor.response.onSuccess = (Response response) {
+    }, onResponse: (Response response) {
       return response;
-    };
-
-    _dio.interceptor.response.onError = (DioError error) {
-      handleError(error);
-      return error;
-    };
+    }, onError: (DioError e) {
+      handleError(e);
+      return e;
+    }));
   }
 
-  void cancelDioInterceptor() {
-    _dio.interceptor.request.onSend = null;
-    _dio.interceptor.response.onSuccess = null;
-    _dio.interceptor.response.onError = null;
-  }
-
-  Future<Response> get(String url,
-          {dynamic data, Options options, CancelToken cancelToken}) =>
+  Future<Response> get(
+    String url, {
+    Map<String, dynamic> queryParameters,
+    Options options,
+    CancelToken cancelToken,
+  }) =>
       _dio.get(
         url,
-        data: data,
         options: options,
+        queryParameters: queryParameters,
         cancelToken: cancelToken,
       );
 
   Future<Response> post(String url,
-          {dynamic data, Options options, CancelToken cancelToken}) =>
+          {dynamic data,
+          Map<String, dynamic> queryParameters,
+          Options options,
+          CancelToken cancelToken}) =>
       _dio.post(
         url,
         data: data,
+        queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
       );
 
   Future<Response> put(String url,
-          {dynamic data, Options options, CancelToken cancelToken}) =>
+          {dynamic data,
+          Map<String, dynamic> queryParameters,
+          Options options,
+          CancelToken cancelToken}) =>
       _dio.put(
         url,
         data: data,
+        queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
       );
 
   Future<Response> delete(String url,
-          {dynamic data, Options options, CancelToken cancelToken}) =>
+          {dynamic data,
+          Map<String, dynamic> queryParameters,
+          Options options,
+          CancelToken cancelToken}) =>
       _dio.delete(
         url,
         data: data,
+        queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
       );
