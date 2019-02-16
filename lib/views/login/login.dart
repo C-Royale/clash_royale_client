@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../home/main.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -6,7 +7,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _usertagController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             PrimaryColorOverride(
               color: Color(0xFF442B2D),
               child: TextField(
-                controller: _usernameController,
+                controller: _usertagController,
                 decoration: const InputDecoration(
                   labelText: 'User Tag',
                 ),
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
                       onPressed: () {
-                        _usernameController.clear();
+                        _usertagController.clear();
                       },
                     ),
                     RaisedButton(
@@ -57,7 +58,10 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(context,
+                            new MaterialPageRoute(builder: (context) {
+                          return new HomeState();
+                        }));
                       },
                     ),
                   ],

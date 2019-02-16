@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './profile/main.dart';
 import './clan/main.dart';
+import './setting/setting.dart';
 
 class Navbar extends StatelessWidget {
   @override
@@ -60,8 +61,11 @@ class Navbar extends StatelessWidget {
             title: Text('设置'),
             trailing: new Icon(Icons.settings),
             onTap: () {
-              // Update the state of the app
-              // ...
+              Navigator.of(context).pop();
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(builder: (BuildContext context) {
+                return new Setting();
+              }));
             },
           ),
         ],
