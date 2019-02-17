@@ -16,10 +16,11 @@ class _SettingState extends State<Setting> {
         child: RaisedButton(
           child: Text("退出"),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                new MaterialPageRoute(builder: (context) {
-              return new LoginPage();
-            }));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+              (Route<dynamic> route) => false,
+            );
           },
         ),
       ),

@@ -58,10 +58,12 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacement(context,
-                            new MaterialPageRoute(builder: (context) {
-                          return new HomeState();
-                        }));
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => HomeState()),
+                          (Route<dynamic> route) => false,
+                        );
                       },
                     ),
                   ],
