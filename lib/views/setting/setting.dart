@@ -15,6 +15,8 @@ class _SettingState extends State<Setting> {
       ),
       body: new Center(
         child: ListView(children: <Widget>[
+          ThemeSetting(),
+          Divider(),
           RaisedButton(
             child: Text("退出"),
             onPressed: () {
@@ -26,17 +28,43 @@ class _SettingState extends State<Setting> {
               );
             },
           ),
-          RaisedButton(
-            child: Text("切换主题"),
-            onPressed: () {
-              DynamicTheme.of(context).setBrightness(
-                  Theme.of(context).brightness == Brightness.dark
-                      ? Brightness.light
-                      : Brightness.dark);
-            },
-          )
         ]),
       ),
     );
+  }
+}
+
+class ThemeSetting extends StatefulWidget {
+  _ThemeSettingState createState() => _ThemeSettingState();
+}
+
+class _ThemeSettingState extends State<ThemeSetting> {
+  bool _value = false;
+
+  @override
+  void initState() {
+    // TODO: implement Theme.of(context).brightness == Brightness.dark with _value
+    super.initState();
+  }
+
+  void _onChanged(bool value) {
+    setState(() {
+      _value = value;
+      DynamicTheme.of(context).setBrightness(
+          Theme.of(context).brightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new SwitchListTile(
+        title: new Text('切换主题'),
+        secondary: const Icon(Icons.home),
+        value: _value,
+        onChanged: (bool value) {
+          _onChanged(value);
+        });
   }
 }
