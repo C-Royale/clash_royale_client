@@ -16,8 +16,15 @@ class _SettingState extends State<Setting> {
       body: new Center(
         child: ListView(children: <Widget>[
           ThemeSetting(),
+          ListTile(
+              leading: const Icon(Icons.language),
+              title: const Text('Language'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                print('language is click...');
+              }),
           Divider(),
-          RaisedButton(
+          FlatButton(
             child: Text("退出"),
             onPressed: () {
               Navigator.pushAndRemoveUntil(
@@ -28,6 +35,7 @@ class _SettingState extends State<Setting> {
               );
             },
           ),
+          Divider(),
         ]),
       ),
     );
@@ -42,9 +50,9 @@ class _ThemeSettingState extends State<ThemeSetting> {
   bool _value = false;
 
   @override
-  void initState() {
-    // TODO: implement Theme.of(context).brightness == Brightness.dark with _value
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _value = Theme.of(context).brightness == Brightness.dark;
   }
 
   void _onChanged(bool value) {
@@ -60,8 +68,8 @@ class _ThemeSettingState extends State<ThemeSetting> {
   @override
   Widget build(BuildContext context) {
     return new SwitchListTile(
-        title: new Text('切换主题'),
-        secondary: const Icon(Icons.home),
+        title: new Text('夜间模式'),
+        secondary: const Icon(Icons.brightness_medium),
         value: _value,
         onChanged: (bool value) {
           _onChanged(value);
