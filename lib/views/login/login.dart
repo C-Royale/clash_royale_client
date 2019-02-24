@@ -8,15 +8,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usertagController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return Scaffold(body: new Builder(builder: (BuildContext context) {
+      return SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            const SizedBox(height: 80.0),
+            const SizedBox(height: 40.0),
             Column(
               children: <Widget>[
                 Image.network(
@@ -29,66 +30,58 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             const SizedBox(height: 120.0),
-            PrimaryColorOverride(
-              color: Color(0xFF442B2D),
-              child: TextField(
-                controller: _usertagController,
-                decoration: const InputDecoration(
-                  labelText: 'User Tag',
-                ),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextFormField(
+                    controller: _usertagController,
+                    decoration: const InputDecoration(labelText: 'User Tag'),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter your TAG';
+                      }
+                    },
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ButtonBar(
+                        children: <Widget>[
+                          FlatButton(
+                            child: const Text('CANCEL'),
+                            onPressed: () {
+                              _usertagController.clear();
+                            },
+                          ),
+                          RaisedButton(
+                            child: Text('Next'),
+                            color: Colors.blue,
+                            elevation: 4.0,
+                            splashColor: Colors.blueGrey,
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                print(_usertagController.text);
+                                // Scaffold.of(context).showSnackBar(
+                                //     SnackBar(content: Text('Processing Data')));
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          HomeState()),
+                                  (Route<dynamic> route) => false,
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      )),
+                ],
               ),
-            ),
-            Wrap(
-              children: <Widget>[
-                ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                      child: const Text('CANCEL'),
-                      shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      ),
-                      onPressed: () {
-                        _usertagController.clear();
-                      },
-                    ),
-                    RaisedButton(
-                      child: const Text('NEXT'),
-                      elevation: 8.0,
-                      shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      ),
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => HomeState()),
-                          (Route<dynamic> route) => false,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class PrimaryColorOverride extends StatelessWidget {
-  const PrimaryColorOverride({Key key, this.color, this.child})
-      : super(key: key);
-
-  final Color color;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Theme(
-      child: child,
-      data: Theme.of(context).copyWith(primaryColor: color),
-    );
+      );
+    }));
   }
 }
