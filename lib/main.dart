@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'views/home/main.dart';
 import 'views/login/login.dart';
 
@@ -18,8 +20,39 @@ class MyApp extends StatelessWidget {
           return new MaterialApp(
             title: 'Flutter Demo',
             theme: theme,
-            home: new LoginPage(),
+            home: MainPage(),
           );
         });
+  }
+}
+
+class MainPage extends StatefulWidget {
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  var _result;
+
+  Future<String> getUserTag() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('UserTag');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserTag().then((onValue) {
+      setState(() {
+        _result = onValue;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_result == null) {
+      return LoginPage();
+    }
+    return HomeState();
   }
 }

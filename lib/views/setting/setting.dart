@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../login/login.dart';
 
 class Setting extends StatefulWidget {
@@ -26,7 +27,9 @@ class _SettingState extends State<Setting> {
           Divider(),
           FlatButton(
             child: Text("退出"),
-            onPressed: () {
+            onPressed: () async{
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove('UserTag');
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(

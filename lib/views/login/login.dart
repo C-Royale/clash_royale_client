@@ -1,4 +1,6 @@
+import 'package:clash_royale_client/api/api.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../home/main.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            const SizedBox(height: 40.0),
+            const SizedBox(height: 10.0),
             Column(
               children: <Widget>[
                 Image.network(
@@ -59,18 +61,30 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.blue,
                             elevation: 4.0,
                             splashColor: Colors.blueGrey,
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
-                                print(_usertagController.text);
                                 // Scaffold.of(context).showSnackBar(
                                 //     SnackBar(content: Text('Processing Data')));
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          HomeState()),
-                                  (Route<dynamic> route) => false,
-                                );
+                                try {
+                                  await player(_usertagController.text);
+                                  // save usertag to SharedPreferences
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.setString(
+                                      'UserTag', _usertagController.text);
+
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomeState()),
+                                    (Route<dynamic> route) => false,
+                                  );
+                                } catch (e) {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text('User Tag Error'),
+                                  ));
+                                }
                               }
                             },
                           ),
