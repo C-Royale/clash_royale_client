@@ -27,15 +27,8 @@ class _SettingState extends State<Setting> {
           Divider(),
           FlatButton(
             child: Text("退出"),
-            onPressed: () async{
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.remove('UserTag');
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => LoginPage()),
-                (Route<dynamic> route) => false,
-              );
+            onPressed: () {
+              _showDialog(context);
             },
           ),
           Divider(),
@@ -78,4 +71,39 @@ class _ThemeSettingState extends State<ThemeSetting> {
           _onChanged(value);
         });
   }
+}
+
+void _showDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: new Text("确认退出？"),
+        actions: <Widget>[
+          new FlatButton(
+            child: new Text(
+              "取消",
+              style: TextStyle(color: Colors.grey),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          new FlatButton(
+            child: new Text("确认"),
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove('UserTag');
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => LoginPage()),
+                (Route<dynamic> route) => false,
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
