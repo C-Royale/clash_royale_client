@@ -11,6 +11,36 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usertagController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String userTag;
+  bool autovalidate = false;
+
+  void submitLoginForm(BuildContext context) async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      // Scaffold.of(context).showSnackBar(
+      //     SnackBar(content: Text('Processing Data')));
+      try {
+        await player(userTag);
+        // save usertag to SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('UserTag', userTag);
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => HomeState()),
+          (Route<dynamic> route) => false,
+        );
+      } catch (e) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('User Tag Error'),
+        ));
+      }
+    } else {
+      setState(() {
+        autovalidate = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +75,10 @@ class _LoginPageState extends State<LoginPage> {
                         return 'Please enter your TAG';
                       }
                     },
+                    onSaved: (value) {
+                      userTag = value;
+                    },
+                    autovalidate: autovalidate,
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -61,32 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.blue,
                             elevation: 4.0,
                             splashColor: Colors.blueGrey,
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                // Scaffold.of(context).showSnackBar(
-                                //     SnackBar(content: Text('Processing Data')));
-                                try {
-                                  await player(_usertagController.text);
-                                  // save usertag to SharedPreferences
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  prefs.setString(
-                                      'UserTag', _usertagController.text);
-
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            HomeState()),
-                                    (Route<dynamic> route) => false,
-                                  );
-                                } catch (e) {
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text('User Tag Error'),
-                                  ));
-                                }
-                              }
-                            },
+                            onPressed: () => submitLoginForm(context),
                           ),
                         ],
                       )),
