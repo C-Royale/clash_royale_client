@@ -1,6 +1,6 @@
+import 'package:clash_royale_client/views/home/battles.dart';
+import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
-import '../navbar.dart';
-import './battles.dart';
 import '../../api/api.dart';
 
 List tabs = ["概览", "卡组", "战绩"];

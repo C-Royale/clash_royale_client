@@ -1,7 +1,7 @@
+import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../login/login.dart';
 
 class Setting extends StatefulWidget {
   _SettingState createState() => _SettingState();

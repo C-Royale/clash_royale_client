@@ -1,7 +1,7 @@
 import 'package:clash_royale_client/api/api.dart';
+import 'package:clash_royale_client/views/home/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../home/main.dart';
 
 class LoginPage extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
+import 'package:clash_royale_client/views/clan/main.dart';
+import 'package:clash_royale_client/views/profile/main.dart';
+import 'package:clash_royale_client/views/setting/setting.dart';
 import 'package:flutter/material.dart';
-import './profile/main.dart';
-import './clan/main.dart';
-import './setting/setting.dart';
 
 class Navbar extends StatelessWidget {
   @override
