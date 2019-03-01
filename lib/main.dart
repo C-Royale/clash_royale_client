@@ -1,28 +1,37 @@
 import 'dart:async';
+import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux_thunk/redux_thunk.dart';
+
+final store = new Store<AppState>(reducer,
+    initialState: new AppState(0, "", ""), middleware: [thunkMiddleware]);
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => new ThemeData(
-              primarySwatch: Colors.indigo,
-              brightness: brightness,
-            ),
-        themedWidgetBuilder: (context, theme) {
-          return new MaterialApp(
-            title: 'Flutter Demo',
-            theme: theme,
-            home: MainPage(),
-          );
-        });
+    return StoreProvider<AppState>(
+        store: store,
+        child: new DynamicTheme(
+            defaultBrightness: Brightness.light,
+            data: (brightness) => new ThemeData(
+                  primarySwatch: Colors.indigo,
+                  brightness: brightness,
+                ),
+            themedWidgetBuilder: (context, theme) {
+              return new MaterialApp(
+                title: 'Flutter Demo',
+                theme: theme,
+                home: MainPage(),
+              );
+            }));
   }
 }
 

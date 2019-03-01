@@ -1,9 +1,13 @@
+import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import '../../api/api.dart';
 
 List tabs = ["概览", "卡组", "战绩"];
+
+typedef void GenerateQuote();
 
 class HomeState extends StatefulWidget {
   static final String routeName = '/home';
@@ -42,7 +46,33 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
             Container(
               alignment: Alignment.center,
               child: RaisedButton(
-                child: Text("概览"),
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // display random quote and its author
+                    StoreConnector<AppState, AppState>(
+                      converter: (store) => store.state,
+                      builder: (_, state) {
+                        return new Text(
+                          ' ${state.quote} \n -${state.author}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 20.0),
+                        );
+                      },
+                    ),
+                    // generate quote button
+                    StoreConnector<AppState, GenerateQuote>(
+                      converter: (store) =>
+                          () => store.dispatch(getRandomQuote),
+                      builder: (_, generateQuoteCallback) {
+                        return new FlatButton(
+                            color: Colors.lightBlue,
+                            onPressed: generateQuoteCallback,
+                            child: new Text("generate random quote"));
+                      },
+                    )
+                  ],
+                ),
                 onPressed: getVersion,
               ),
             ),
