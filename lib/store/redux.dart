@@ -1,6 +1,6 @@
+import 'package:clash_royale_client/model/quote.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
-import 'dart:convert';
 import 'package:dio/dio.dart';
 
 // AppState
@@ -34,14 +34,15 @@ ThunkAction<AppState> getRandomQuote = (Store<AppState> store) async {
   try {
     Response response = await Dio().get(
         "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1");
-        print('---> ${response.data}');
-    List<dynamic> result = json.decode(response.data);
+    List<Quote> quotes =
+        (response.data as List).map((e) => new Quote.fromJson(e)).toList();
 
     // This is to remove the <p></p> html tag received. This code is not crucial.
-    String quote = result[0]['content']
+    String quote = quotes[0]
+        .content
         .replaceAll(new RegExp('[(<p>)(</p>)]'), '')
         .replaceAll(new RegExp('&#8217;'), '\'');
-    String author = result[0]['title'];
+    String author = quotes[0].title;
 
     store.dispatch(new UpdateQuoteAction(quote, author));
   } catch (e) {
@@ -51,19 +52,17 @@ ThunkAction<AppState> getRandomQuote = (Store<AppState> store) async {
 
 // Reducer
 AppState reducer(AppState prev, dynamic action) {
-
   if (action == Action.IncrementAction) {
-
-    AppState newAppState = new AppState(prev.counter + 1, prev.quote, prev.author);
+    AppState newAppState =
+        new AppState(prev.counter + 1, prev.quote, prev.author);
 
     return newAppState;
-
   } else if (action is UpdateQuoteAction) {
-    AppState newAppState = new AppState(prev.counter, action.quote, action.author);
+    AppState newAppState =
+        new AppState(prev.counter, action.quote, action.author);
 
     return newAppState;
   } else {
     return prev;
   }
-
 }

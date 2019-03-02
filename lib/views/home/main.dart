@@ -45,35 +45,32 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
           children: [
             Container(
               alignment: Alignment.center,
-              child: RaisedButton(
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    // display random quote and its author
-                    StoreConnector<AppState, AppState>(
-                      converter: (store) => store.state,
-                      builder: (_, state) {
-                        return new Text(
-                          ' ${state.quote} \n -${state.author}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 20.0),
-                        );
-                      },
-                    ),
-                    // generate quote button
-                    StoreConnector<AppState, GenerateQuote>(
-                      converter: (store) =>
-                          () => store.dispatch(getRandomQuote),
-                      builder: (_, generateQuoteCallback) {
-                        return new FlatButton(
-                            color: Colors.lightBlue,
-                            onPressed: generateQuoteCallback,
-                            child: new Text("generate random quote"));
-                      },
-                    )
-                  ],
-                ),
-                onPressed: getVersion,
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // display random quote and its author
+                  StoreConnector<AppState, AppState>(
+                    converter: (store) => store.state,
+                    builder: (_, state) {
+                      return new Text(
+                        ' ${state.quote} \n -${state.author}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 20.0),
+                      );
+                    },
+                  ),
+                  // generate quote button
+                  StoreConnector<AppState, GenerateQuote>(
+                    converter: (store) =>
+                        () => store.dispatch(getRandomQuote),
+                    builder: (_, generateQuoteCallback) {
+                      return new FlatButton(
+                          color: Colors.lightBlue,
+                          onPressed: generateQuoteCallback,
+                          child: new Text("generate random quote"));
+                    },
+                  )
+                ],
               ),
             ),
             Container(
