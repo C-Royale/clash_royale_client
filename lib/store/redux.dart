@@ -34,6 +34,7 @@ ThunkAction<AppState> getRandomQuote = (Store<AppState> store) async {
   try {
     Response response = await Dio().get(
         "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1");
+
     List<Quote> quotes =
         (response.data as List).map((e) => new Quote.fromJson(e)).toList();
 

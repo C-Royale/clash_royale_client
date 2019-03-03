@@ -3,7 +3,6 @@ import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../api/api.dart';
 
 List tabs = ["概览", "卡组", "战绩"];
 
@@ -61,8 +60,7 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
                   ),
                   // generate quote button
                   StoreConnector<AppState, GenerateQuote>(
-                    converter: (store) =>
-                        () => store.dispatch(getRandomQuote),
+                    converter: (store) => () => store.dispatch(getRandomQuote),
                     builder: (_, generateQuoteCallback) {
                       return new FlatButton(
                           color: Colors.lightBlue,
