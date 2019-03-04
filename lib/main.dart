@@ -10,7 +10,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 
 final store = new Store<AppState>(reducer,
-    initialState: new AppState(0, "", ""), middleware: [thunkMiddleware]);
+    initialState: new AppState("", ""), middleware: [thunkMiddleware]);
 
 void main() => runApp(MyApp());
 

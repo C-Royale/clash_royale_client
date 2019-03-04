@@ -5,19 +5,14 @@ import 'package:dio/dio.dart';
 
 // AppState
 class AppState {
-  int _counter;
   String _quote;
   String _author;
 
-  int get counter => _counter;
   String get quote => _quote;
   String get author => _author;
 
-  AppState(this._counter, this._quote, this._author);
+  AppState(this._quote, this._author);
 }
-
-// Sync Action
-enum Action { IncrementAction }
 
 class UpdateQuoteAction {
   String _quote;
@@ -53,15 +48,8 @@ ThunkAction<AppState> getRandomQuote = (Store<AppState> store) async {
 
 // Reducer
 AppState reducer(AppState prev, dynamic action) {
-  if (action == Action.IncrementAction) {
-    AppState newAppState =
-        new AppState(prev.counter + 1, prev.quote, prev.author);
-
-    return newAppState;
-  } else if (action is UpdateQuoteAction) {
-    AppState newAppState =
-        new AppState(prev.counter, action.quote, action.author);
-
+  if (action is UpdateQuoteAction) {
+    AppState newAppState = new AppState(action.quote, action.author);
     return newAppState;
   } else {
     return prev;
