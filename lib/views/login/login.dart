@@ -1,6 +1,10 @@
 import 'package:clash_royale_client/api/api.dart';
+import 'package:clash_royale_client/model/player.dart';
+import 'package:clash_royale_client/store/user.dart';
 import 'package:clash_royale_client/views/home/main.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,10 +24,14 @@ class _LoginPageState extends State<LoginPage> {
       // Scaffold.of(context).showSnackBar(
       //     SnackBar(content: Text('Processing Data')));
       try {
-        await player(userTag);
+        Response res = await player(userTag);
+        Player user = Player.fromJson(res.data);
+        print('333333333');
         // save usertag to SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('UserTag', userTag);
+        print(user is Player);
+        StoreProvider.of(context).dispatch(UpdatePlayerAction(user));
 
         Navigator.pushAndRemoveUntil(
           context,
@@ -32,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         );
       } catch (e) {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('User Tag Error'),
+          content: Text('User Tag Error' + e),
         ));
       }
     } else {
