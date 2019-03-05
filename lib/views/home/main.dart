@@ -1,8 +1,10 @@
+import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 List tabs = ["概览", "卡组", "战绩"];
 
@@ -43,34 +45,13 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
           controller: _tabController,
           children: [
             Container(
-              alignment: Alignment.center,
-              child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // display random quote and its author
-                  StoreConnector<AppState, AppState>(
-                    converter: (store) => store.state,
-                    builder: (_, state) {
-                      return new Text(
-                        ' ${state.quote} \n -${state.author}',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 20.0),
-                      );
-                    },
-                  ),
-                  // generate quote button
-                  StoreConnector<AppState, GenerateQuote>(
-                    converter: (store) => () => store.dispatch(getRandomQuote),
-                    builder: (_, generateQuoteCallback) {
-                      return new FlatButton(
-                          color: Colors.lightBlue,
-                          onPressed: generateQuoteCallback,
-                          child: new Text("generate random quote"));
-                    },
-                  )
-                ],
-              ),
-            ),
+                alignment: Alignment.center,
+                child: StoreConnector<AppState, Player>(
+                    distinct: true,
+                    converter: (Store<AppState> store) => store.state.player,
+                    builder: (_, player) {
+                      return Text('player.name');
+                    }) /*Text("概览")*/),
             Container(
               alignment: Alignment.center,
               child: Text('卡组', textScaleFactor: 5),

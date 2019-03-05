@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:clash_royale_client/views/login/login.dart';
@@ -9,8 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 
-final store = new Store<AppState>(reducer,
-    initialState: new AppState("", ""), middleware: [thunkMiddleware]);
+final store = new Store<AppState>(appReducer,
+    initialState: new AppState(
+      player: Player.empty()
+    ));
 
 void main() => runApp(MyApp());
 
