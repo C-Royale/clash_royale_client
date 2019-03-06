@@ -50,8 +50,8 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
                     distinct: true,
                     converter: (Store<AppState> store) => store.state.player,
                     builder: (_, player) {
-                      return Text('player.name');
-                    }) /*Text("概览")*/),
+                      return Text(player.name);
+                    })),
             Container(
               alignment: Alignment.center,
               child: Text('卡组', textScaleFactor: 5),

@@ -1,10 +1,12 @@
 import 'package:clash_royale_client/api/api.dart';
 import 'package:clash_royale_client/model/player.dart';
+import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/store/user.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,12 +28,10 @@ class _LoginPageState extends State<LoginPage> {
       try {
         Response res = await player(userTag);
         Player user = Player.fromJson(res.data);
-        print('333333333');
         // save usertag to SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('UserTag', userTag);
-        print(user is Player);
-        StoreProvider.of(context).dispatch(UpdatePlayerAction(user));
+        _getStore()?.dispatch(UpdatePlayerAction(user));
 
         Navigator.pushAndRemoveUntil(
           context,
@@ -48,6 +48,10 @@ class _LoginPageState extends State<LoginPage> {
         autovalidate = true;
       });
     }
+  }
+
+  Store<AppState> _getStore() {
+    return StoreProvider.of(context);
   }
 
   @override
@@ -98,13 +102,15 @@ class _LoginPageState extends State<LoginPage> {
                               _usertagController.clear();
                             },
                           ),
-                          RaisedButton(
-                            child: Text('Next'),
-                            color: Colors.blue,
-                            elevation: 4.0,
-                            splashColor: Colors.blueGrey,
-                            onPressed: () => submitLoginForm(context),
-                          ),
+                          new StoreBuilder<AppState>(builder: (context, store) {
+                            return RaisedButton(
+                              child: Text('Next'),
+                              color: Colors.blue,
+                              elevation: 4.0,
+                              splashColor: Colors.blueGrey,
+                              onPressed: () => submitLoginForm(context),
+                            );
+                          }),
                         ],
                       )),
                 ],

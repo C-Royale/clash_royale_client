@@ -8,12 +8,9 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux_thunk/redux_thunk.dart';
 
 final store = new Store<AppState>(appReducer,
-    initialState: new AppState(
-      player: Player.empty()
-    ));
+    initialState: new AppState(player: Player.empty()));
 
 void main() => runApp(MyApp());
 
