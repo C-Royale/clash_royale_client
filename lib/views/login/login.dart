@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         // save usertag to SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('UserTag', userTag);
-        _getStore()?.dispatch(UpdatePlayerAction(user));
+        _getStore()?.dispatch(waitAndDispatch(3, user));
 
         Navigator.pushAndRemoveUntil(
           context,
