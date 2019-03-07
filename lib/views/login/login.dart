@@ -1,13 +1,8 @@
-import 'package:clash_royale_client/api/api.dart';
-import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/store/user.dart';
-import 'package:clash_royale_client/views/home/main.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,21 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   void submitLoginForm(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      // Scaffold.of(context).showSnackBar(
-      //     SnackBar(content: Text('Processing Data')));
       try {
-        Response res = await player(userTag);
-        Player user = Player.fromJson(res.data);
-        // save usertag to SharedPreferences
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('UserTag', userTag);
-        _getStore()?.dispatch(waitAndDispatch(3, user));
+        _getStore()?.dispatch(LoginAction(_getStore(), context, userTag));
 
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (BuildContext context) => HomeState()),
-          (Route<dynamic> route) => false,
-        );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(builder: (BuildContext context) => HomeState()),
+        //   (Route<dynamic> route) => false,
+        // );
       } catch (e) {
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text('User Tag Error' + e),
