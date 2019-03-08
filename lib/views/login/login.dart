@@ -1,4 +1,4 @@
-import 'package:clash_royale_client/store/redux.dart';
+import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/store/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';

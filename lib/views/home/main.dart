@@ -1,5 +1,5 @@
 import 'package:clash_royale_client/model/player.dart';
-import 'package:clash_royale_client/store/redux.dart';
+import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,11 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
                     distinct: true,
                     converter: (Store<AppState> store) => store.state.player,
                     builder: (_, player) {
-                      return Text(player.name);
+                      if (player.name != null) {
+                        return Text(player.name);
+                      } else {
+                        return Text('-');
+                      }
                     })),
             Container(
               alignment: Alignment.center,

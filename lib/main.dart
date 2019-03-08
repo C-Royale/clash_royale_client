@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:clash_royale_client/model/player.dart';
-import 'package:clash_royale_client/store/redux.dart';
+import 'package:clash_royale_client/store/state.dart';
+import 'package:clash_royale_client/store/store.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +8,17 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux_thunk/redux_thunk.dart';
 
-final store = new Store<AppState>(appReducer,
-    initialState: new AppState(player: Player.empty()),
-    middleware: [thunkMiddleware]);
-
-void main() => runApp(MyApp());
+void main() async {
+  var store = await createStore();
+  runApp(MyApp(store));
+}
 
 class MyApp extends StatelessWidget {
+  final Store<AppState> store;
+
+  MyApp(this.store);
+
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
