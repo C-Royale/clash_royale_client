@@ -1,6 +1,6 @@
 import 'package:clash_royale_client/api/api.dart';
 import 'package:clash_royale_client/model/player.dart';
-import 'package:clash_royale_client/store/redux.dart';
+import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/utils/localstorage.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:dio/dio.dart';

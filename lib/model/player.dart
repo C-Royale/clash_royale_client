@@ -1,11 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-  
+import 'package:json_annotation/json_annotation.dart';
+
 part 'player.g.dart';
 
-
 @JsonSerializable()
-  class Player extends Object {
-
+class Player extends Object {
   @JsonKey(name: 'tag')
   String tag;
 
@@ -18,13 +16,12 @@ part 'player.g.dart';
   @JsonKey(name: 'rank')
   int rank;
 
-  Player(this.tag,this.name,this.trophies,this.rank,);
+  Player({this.tag, this.name, this.trophies, this.rank});
 
-  factory Player.fromJson(Map<String, dynamic> srcJson) => _$PlayerFromJson(srcJson);
+  factory Player.fromJson(Map<String, dynamic> srcJson) =>
+      _$PlayerFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$PlayerToJson(this);
 
   Player.empty();
 }
-
-  

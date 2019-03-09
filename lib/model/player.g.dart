@@ -7,8 +7,11 @@ part of 'player.dart';
 // **************************************************************************
 
 Player _$PlayerFromJson(Map<String, dynamic> json) {
-  return Player(json['tag'] as String, json['name'] as String,
-      json['trophies'] as int, json['rank'] as int);
+  return Player(
+      tag: json['tag'] as String,
+      name: json['name'] as String,
+      trophies: json['trophies'] as int,
+      rank: json['rank'] as int);
 }
 
 Map<String, dynamic> _$PlayerToJson(Player instance) => <String, dynamic>{
