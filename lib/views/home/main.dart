@@ -1,5 +1,6 @@
 import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/state.dart';
+import 'package:clash_royale_client/utils/commonUtils.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Clash_Royale Box (beta)'),
+          title: Text(CommonUtils.getLocale(context).app_name),
           bottom: TabBar(
               controller: _tabController,
               tabs: tabs.map((e) => Tab(text: e)).toList()),

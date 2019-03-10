@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/store/store.dart';
+import 'package:clash_royale_client/utils/i18n/localizationsDelegate.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -31,10 +33,19 @@ class MyApp extends StatelessWidget {
                 ),
             themedWidgetBuilder: (context, theme) {
               return new MaterialApp(
-                title: 'Flutter Demo',
-                theme: theme,
-                home: MainPage(),
-              );
+                  title: 'Flutter Demo',
+                  theme: theme,
+                  locale: Locale('zh', 'CH'),
+                  home: MainPage(),
+                  localizationsDelegates: [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    CRLocalizationsDelegate.delegate,
+                  ],
+                  supportedLocales: [
+                    const Locale('zh', 'CH'),
+                    const Locale('en', 'US'),
+                  ]);
             }));
   }
 }
