@@ -16,7 +16,6 @@ class CRLocalizationsDelegate extends LocalizationsDelegate<CRLocalizations> {
   ///根据 locale，创建一个对象用于提供当前 locale 下的文本显示
   @override
   Future<CRLocalizations> load(Locale locale) {
-    print('locale: ${locale.languageCode}');
     return new SynchronousFuture<CRLocalizations>(new CRLocalizations(locale));
   }
 

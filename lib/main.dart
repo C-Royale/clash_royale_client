@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/store/store.dart';
 import 'package:clash_royale_client/utils/i18n/localizationsDelegate.dart';
+import 'package:clash_royale_client/views/common/localization_widget.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
               return new MaterialApp(
                   title: 'Flutter Demo',
                   theme: theme,
-                  locale: Locale('zh', 'CH'),
+                  locale: store.state.locale,
                   home: MainPage(),
                   localizationsDelegates: [
                     GlobalMaterialLocalizations.delegate,
@@ -74,9 +75,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_result == null) {
-      return LoginPage();
-    }
-    return HomeState();
+    return _result == null
+        ? LocalizationsWidget(child: LoginPage())
+        : LocalizationsWidget(child: HomeState());
   }
 }

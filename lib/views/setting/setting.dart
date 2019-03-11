@@ -1,6 +1,8 @@
+import 'package:clash_royale_client/utils/commonUtils.dart';
 import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatefulWidget {
@@ -12,18 +14,26 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('设置'),
+        title: new Text(CommonUtils.getLocale(context).setting_title),
       ),
       body: new Center(
         child: ListView(children: <Widget>[
           ThemeSetting(),
           ListTile(
-              leading: const Icon(Icons.language),
-              title: const Text('Language'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                print('language is click...');
-              }),
+            leading: const Icon(Icons.language),
+            title: const Text('Language'),
+            trailing: PopupMenuButton<int>(
+                onSelected: (int value) {
+                  CommonUtils.changeLocale(StoreProvider.of(context), value);
+                },
+                padding: EdgeInsets.zero,
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+                      const PopupMenuItem<int>(
+                          value: 1, child: ListTile(title: Text('中文'))),
+                      const PopupMenuItem<int>(
+                          value: 2, child: ListTile(title: Text('English'))),
+                    ]),
+          ),
           Divider(),
           FlatButton(
             child: Text("退出"),

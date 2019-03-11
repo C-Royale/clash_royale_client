@@ -1,4 +1,5 @@
 import 'package:clash_royale_client/views/clan/main.dart';
+import 'package:clash_royale_client/views/common/localization_widget.dart';
 import 'package:clash_royale_client/views/profile/main.dart';
 import 'package:clash_royale_client/views/setting/setting.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,9 @@ class Navbar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               // Navigator.of(context).pushReplacementNamed('/profile');
-              Navigator.of(context)
-                  .push(new MaterialPageRoute(builder: (BuildContext context) {
-                return new Profile();
-              }));
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      LocalizationsWidget(child: Profile())));
             },
           ),
           ListTile(
@@ -34,10 +34,9 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.people),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context)
-                  .push(new MaterialPageRoute(builder: (BuildContext context) {
-                return new Clan();
-              }));
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      LocalizationsWidget(child: Clan())));
             },
           ),
           ListTile(
@@ -62,10 +61,9 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.settings),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context)
-                  .push(new MaterialPageRoute(builder: (BuildContext context) {
-                return new Setting();
-              }));
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      LocalizationsWidget(child: Setting())));
             },
           ),
         ],
