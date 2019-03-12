@@ -1,5 +1,5 @@
+import 'package:clash_royale_client/router/router.dart';
 import 'package:clash_royale_client/utils/commonUtils.dart';
-import 'package:clash_royale_client/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -104,12 +104,7 @@ void _showDialog(BuildContext context) {
             onPressed: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.remove('UserTag');
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => LoginPage()),
-                (Route<dynamic> route) => false,
-              );
+              Routes.router.navigateTo(context, "/login", clearStack: true);
             },
           ),
         ],

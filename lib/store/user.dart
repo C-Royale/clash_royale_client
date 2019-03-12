@@ -1,9 +1,8 @@
 import 'package:clash_royale_client/api/api.dart';
 import 'package:clash_royale_client/model/player.dart';
+import 'package:clash_royale_client/router/router.dart';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/utils/localstorage.dart';
-import 'package:clash_royale_client/views/common/localization_widget.dart';
-import 'package:clash_royale_client/views/home/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
@@ -32,13 +31,7 @@ ThunkAction<AppState> getPlayerAndStoreThunk(
 
     store.dispatch(UpdatePlayerAction(user));
 
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-          builder: (BuildContext context) =>
-              LocalizationsWidget(child: HomeState())),
-      (Route<dynamic> route) => false,
-    );
+    Routes.router.navigateTo(context, "/home", clearStack: true);
   };
 }
 

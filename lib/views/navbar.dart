@@ -1,7 +1,4 @@
-import 'package:clash_royale_client/views/clan/main.dart';
-import 'package:clash_royale_client/views/common/localization_widget.dart';
-import 'package:clash_royale_client/views/profile/main.dart';
-import 'package:clash_royale_client/views/setting/setting.dart';
+import 'package:clash_royale_client/router/router.dart';
 import 'package:flutter/material.dart';
 
 class Navbar extends StatelessWidget {
@@ -23,10 +20,7 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.perm_identity),
             onTap: () {
               Navigator.of(context).pop();
-              // Navigator.of(context).pushReplacementNamed('/profile');
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      LocalizationsWidget(child: Profile())));
+              Routes.router.navigateTo(context, "/profile");
             },
           ),
           ListTile(
@@ -34,9 +28,7 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.people),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      LocalizationsWidget(child: Clan())));
+              Routes.router.navigateTo(context, "/clan");
             },
           ),
           ListTile(
@@ -61,9 +53,7 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.settings),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      LocalizationsWidget(child: Setting())));
+              Routes.router.navigateTo(context, "/setting");
             },
           ),
         ],

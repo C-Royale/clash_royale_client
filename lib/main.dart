@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:clash_royale_client/router/router.dart';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/store/store.dart';
 import 'package:clash_royale_client/utils/i18n/localizationsDelegate.dart';
 import 'package:clash_royale_client/views/common/localization_widget.dart';
 import 'package:clash_royale_client/views/home/main.dart';
 import 'package:clash_royale_client/views/login/login.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,6 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 void main() async {
+  final router = new Router();
+  Routes.configureRoutes(router);
   var store = await createStore();
   runApp(MyApp(store));
 }
@@ -36,6 +40,7 @@ class MyApp extends StatelessWidget {
               return new MaterialApp(
                   title: 'Flutter Demo',
                   theme: theme,
+                  onGenerateRoute: Routes.router.generator,
                   locale: store.state.locale,
                   home: MainPage(),
                   localizationsDelegates: [

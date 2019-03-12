@@ -9,8 +9,7 @@ import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 
 final persistor = Persistor<AppState>(
     storage: FlutterStorage(),
-    serializer: JsonSerializer<AppState>(AppState.fromJson),
-    debug: true);
+    serializer: JsonSerializer<AppState>(AppState.fromJson));
 
 Future<Store<AppState>> createStore() async {
   final initialState = await persistor.load();
