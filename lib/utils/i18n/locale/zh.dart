@@ -6,4 +6,37 @@ class LocaleZh extends LocaleBase {
 
   @override
   String setting_title = "设置";
+
+  @override
+  String setting_logout = "退出";
+
+  @override
+  String setting_theme = "夜间模式";
+
+  @override
+  String setting_language = "语言";
+
+  @override
+  String navbar_record = "个人战绩";
+
+  @override
+  String navbar_clan = "部落";
+
+  @override
+  String navbar_arena = "竞技场";
+
+  @override
+  String navbar_cards = "卡牌";
+
+  @override
+  String navbar_setting = "设置";
+
+  @override
+  String home_overview = "概览";
+
+  @override
+  String home_deck = "卡组";
+
+  @override
+  String home_record = "战绩";
 }

@@ -1,6 +1,6 @@
 import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/state.dart';
-import 'package:clash_royale_client/utils/commonUtils.dart';
+import 'package:clash_royale_client/utils/common_utils.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';

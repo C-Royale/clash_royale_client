@@ -1,5 +1,5 @@
 import 'package:clash_royale_client/router/router.dart';
-import 'package:clash_royale_client/utils/commonUtils.dart';
+import 'package:clash_royale_client/utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -21,7 +21,7 @@ class _SettingState extends State<Setting> {
           ThemeSetting(),
           ListTile(
             leading: const Icon(Icons.language),
-            title: const Text('Language'),
+            title: new Text(CommonUtils.getLocale(context).setting_language),
             trailing: PopupMenuButton<int>(
                 onSelected: (int value) {
                   CommonUtils.changeLocale(StoreProvider.of(context), value);
@@ -36,7 +36,7 @@ class _SettingState extends State<Setting> {
           ),
           Divider(),
           FlatButton(
-            child: Text("退出"),
+            child: Text(CommonUtils.getLocale(context).setting_logout),
             onPressed: () {
               _showDialog(context);
             },
@@ -74,7 +74,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
   @override
   Widget build(BuildContext context) {
     return new SwitchListTile(
-        title: new Text('夜间模式'),
+        title: new Text(CommonUtils.getLocale(context).setting_theme),
         secondary: const Icon(Icons.brightness_medium),
         value: _value,
         onChanged: (bool value) {
