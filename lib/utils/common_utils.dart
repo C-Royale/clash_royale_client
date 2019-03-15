@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:clash_royale_client/store/locale.dart';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/utils/i18n/defaultLocalizations.dart';
@@ -21,5 +23,17 @@ class CommonUtils {
         break;
     }
     store.dispatch(RefreshLocaleAction(locale));
+  }
+
+  static List<dynamic> decodeListResult(String data) {
+    return json.decode(data);
+  }
+
+  static Map<String, dynamic> decodeMapResult(String data) {
+    return json.decode(data);
+  }
+
+  static String encodeToString(String data) {
+    return json.encode(data);
   }
 }
