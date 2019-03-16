@@ -36,8 +36,8 @@ class Navbar extends StatelessWidget {
             title: Text(CommonUtils.getLocale(context).navbar_arena),
             trailing: new Icon(Icons.confirmation_number),
             onTap: () {
-              // Update the state of the app
-              // ...
+              Navigator.of(context).pop();
+              Routes.router.navigateTo(context, "/arena");
             },
           ),
           ListTile(

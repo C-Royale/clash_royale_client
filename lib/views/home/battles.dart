@@ -21,8 +21,6 @@ enum _MaterialListType {
 class Battles extends StatefulWidget {
   const Battles({Key key}) : super(key: key);
 
-  static const String routeName = '/home/battles';
-
   @override
   _BattlesState createState() => _BattlesState();
 }

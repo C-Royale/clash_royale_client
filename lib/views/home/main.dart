@@ -12,8 +12,6 @@ List tabs = ["概览", "卡组", "战绩"];
 typedef void GenerateQuote();
 
 class HomeState extends StatefulWidget {
-  static final String routeName = '/home';
-
   @override
   _HomeState createState() => _HomeState();
 }

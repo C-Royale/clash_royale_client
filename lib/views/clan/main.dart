@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Clan extends StatelessWidget {
-  static final String routeName = '/clan';
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

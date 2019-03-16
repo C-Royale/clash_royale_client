@@ -1,4 +1,5 @@
 import 'package:clash_royale_client/main.dart';
+import 'package:clash_royale_client/views/arena/arena.dart';
 import 'package:clash_royale_client/views/clan/main.dart';
 import 'package:clash_royale_client/views/common/localization_widget.dart';
 import 'package:clash_royale_client/views/home/main.dart';
@@ -36,4 +37,9 @@ var settingRouteHandler = new Handler(
 var clanRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: Clan());
+});
+
+var arenaRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return LocalizationsWidget(child: Arena());
 });

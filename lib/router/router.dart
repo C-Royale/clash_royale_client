@@ -10,6 +10,7 @@ class Routes {
   static String profile = "/profile";
   static String setting = "/setting";
   static String clan = "/clan";
+  static String arena = "/arena";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -22,12 +23,15 @@ class Routes {
     router.define(home,
         handler: homeRouteHandler, transitionType: TransitionType.inFromRight);
     router.define(profile,
-        handler: profileRouteHandler, transitionType: TransitionType.inFromRight);
+        handler: profileRouteHandler,
+        transitionType: TransitionType.inFromRight);
     router.define(setting,
         handler: settingRouteHandler,
         transitionType: TransitionType.inFromRight);
     router.define(clan,
         handler: clanRouteHandler, transitionType: TransitionType.inFromRight);
+    router.define(arena,
+        handler: arenaRouteHandler, transitionType: TransitionType.inFromRight);
 
     Routes.router = router;
   }
