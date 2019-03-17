@@ -2,6 +2,7 @@ import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/utils/common_utils.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
+import 'package:clash_royale_client/views/home/overview/overview.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -43,18 +44,18 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: [
-            Container(
-                alignment: Alignment.center,
-                child: StoreConnector<AppState, Player>(
-                    distinct: true,
-                    converter: (Store<AppState> store) => store.state.player,
-                    builder: (_, player) {
-                      if (player.name != null) {
-                        return Text(player.name);
-                      } else {
-                        return Text('-');
-                      }
-                    })),
+            // Temporary things
+            // StoreConnector<AppState, Player>(
+            //     distinct: true,
+            //     converter: (Store<AppState> store) => store.state.player,
+            //     builder: (_, player) {
+            //       if (player.name != null) {
+            //         return Text(player.name);
+            //       } else {
+            //         return Text('-');
+            //       }
+            //     }),
+            Overview(),
             Container(
               alignment: Alignment.center,
               child: Text('卡组', textScaleFactor: 5),

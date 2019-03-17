@@ -1,3 +1,4 @@
+import 'package:clash_royale_client/utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 class Arena extends StatelessWidget {
@@ -11,12 +12,13 @@ class Arena extends StatelessWidget {
             floating: true,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('Arena'),
+              title: Text(CommonUtils.getLocale(context).navbar_arena),
             ),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(title: Text('List'))),
+                (context, index) => ListTile(title: Text('List')),
+                childCount: 20),
           )
         ],
       ),
