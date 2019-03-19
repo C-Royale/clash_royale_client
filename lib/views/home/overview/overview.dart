@@ -11,7 +11,7 @@ class Overview extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10.0),
       child: Column(
-        children: <Widget>[ProfileItem('奖杯'), ProfileItem('战绩')],
+        children: <Widget>[ProfileItem(title: '奖杯'), ProfileItem(title: '战绩')],
       ),
     );
   }

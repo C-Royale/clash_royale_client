@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProfileItem extends StatelessWidget {
   final String title;
 
-  ProfileItem(this.title);
+  ProfileItem({Key key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
