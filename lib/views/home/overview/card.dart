@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfileItem extends StatelessWidget {
-  final Widget child;
+  final String title;
 
-  ProfileItem({Key key, this.child}) : super(key: key);
+  ProfileItem(this.title);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class ProfileItem extends StatelessWidget {
           // card只能有一个widget，但这个widget内容可以包含其他的widget
           children: [
             new ListTile(
-              title: new Text('标题',
+              title: new Text(title,
                   style: new TextStyle(fontWeight: FontWeight.w500)),
             ),
             new Divider(),

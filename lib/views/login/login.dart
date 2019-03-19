@@ -20,12 +20,6 @@ class _LoginPageState extends State<LoginPage> {
       _formKey.currentState.save();
       try {
         _getStore()?.dispatch(LoginAction(_getStore(), context, userTag));
-
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(builder: (BuildContext context) => HomeState()),
-        //   (Route<dynamic> route) => false,
-        // );
       } catch (e) {
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text('User Tag Error' + e),
