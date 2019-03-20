@@ -9,12 +9,14 @@ import 'package:clash_royale_client/views/login/login.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 void main() async {
+  // debugPaintSizeEnabled = true;
   final router = new Router();
   Routes.configureRoutes(router);
   var store = await createStore();

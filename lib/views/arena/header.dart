@@ -23,8 +23,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(
-        child: shrinkOffset == 150.0 ? shrinkChild : child);
+    return SizedBox.expand(child: shrinkOffset == 150.0 ? shrinkChild : child);
   }
 
   @override
@@ -41,36 +40,137 @@ SliverPersistentHeader buildHeader() {
     delegate: _SliverAppBarDelegate(
         minHeight: 80.0,
         maxHeight: 150.0,
-        child: Container(
-            color: Colors.indigo,
-            padding: EdgeInsets.all(5.0),
-            child: new Card(
-              elevation: 15.0, //设置阴影
-              child: new Column(
-                // card只能有一个widget，但这个widget内容可以包含其他的widget
-                children: [
-                  new ListTile(
-                    title: new Text('内容一',
-                        style: new TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 12.0)),
-                    trailing: Text('value'),
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    height: 80.0,
+                    color: Colors.indigo,
                   ),
+                  Container(
+                    height: 60.0,
+                    color: Colors.white,
+                  )
                 ],
               ),
-            )),
+              Container(
+                  padding: EdgeInsets.all(5.0),
+                  child: Card(
+                    elevation: 5.0,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    Text('8', style: TextStyle(fontSize: 40.0)),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(Icons.attach_money,
+                                            color: Colors.grey),
+                                        Text(
+                                          '监控报警',
+                                          style: TextStyle(color: Colors.grey),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    Text('8', style: TextStyle(fontSize: 40.0)),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(Icons.attach_money,
+                                            color: Colors.grey),
+                                        Text(
+                                          '监控报警',
+                                          style: TextStyle(color: Colors.grey),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    Text('8', style: TextStyle(fontSize: 40.0)),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(Icons.attach_money,
+                                            color: Colors.grey),
+                                        Text(
+                                          '监控报警',
+                                          style: TextStyle(color: Colors.grey),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Divider(),
+                          Row(
+                            children: <Widget>[
+                              Icon(Icons.add_alert),
+                              Text('公告: 华北-北京区域云硬盘集群管理系统升级通知')
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ))
+            ],
+          ),
+        ),
         shrinkChild: Container(
             color: Colors.indigo,
             padding: EdgeInsets.all(5.0),
-            child: new Card(
-              elevation: 15.0,
-              child: new Column(
-                children: [
-                  new ListTile(
-                    title: new Text('内容一',
-                        style: new TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 12.0)),
-                  ),
-                ],
+            child: Card(
+              elevation: 5.0,
+              child: Container(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: <Widget>[Icon(Icons.attach_money), Text('公告')],
+                    ),
+                    VerticalDivider(),
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.attach_money, color: Colors.grey),
+                        Text('10',
+                            style: TextStyle(fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                    VerticalDivider(),
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.attach_money, color: Colors.grey),
+                        Text('9', style: TextStyle(fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                    VerticalDivider(),
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.attach_money, color: Colors.grey),
+                        Text('35',
+                            style: TextStyle(fontWeight: FontWeight.bold))
+                      ],
+                    )
+                  ],
+                ),
               ),
             ))),
   );
