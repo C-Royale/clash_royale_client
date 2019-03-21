@@ -34,7 +34,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-SliverPersistentHeader buildHeader() {
+SliverPersistentHeader buildHeader(BuildContext context) {
   return SliverPersistentHeader(
     pinned: true,
     delegate: _SliverAppBarDelegate(
@@ -46,12 +46,10 @@ SliverPersistentHeader buildHeader() {
               Column(
                 children: <Widget>[
                   Container(
-                    height: 80.0,
-                    color: Colors.indigo,
-                  ),
+                      height: 80.0, color: Theme.of(context).primaryColor),
                   Container(
                     height: 60.0,
-                    color: Colors.white,
+                    color: Theme.of(context).secondaryHeaderColor,
                   )
                 ],
               ),
@@ -134,7 +132,7 @@ SliverPersistentHeader buildHeader() {
           ),
         ),
         shrinkChild: Container(
-            color: Colors.indigo,
+            color: Theme.of(context).primaryColor,
             padding: EdgeInsets.all(5.0),
             child: Card(
               elevation: 5.0,

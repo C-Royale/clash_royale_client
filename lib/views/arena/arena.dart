@@ -15,7 +15,7 @@ class Arena extends StatelessWidget {
               title: Text(CommonUtils.getLocale(context).navbar_arena),
             ),
           ),
-          buildHeader(),
+          buildHeader(context),
           SliverToBoxAdapter(
               child: Container(
             padding: EdgeInsets.only(left: 20.0),
