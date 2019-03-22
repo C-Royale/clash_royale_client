@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+final double _dashbordMaxHeight = 150.0;
+final double _dashbordMinHeight = 80.0;
+
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
     @required this.minHeight,
@@ -23,7 +26,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(child: shrinkOffset == 150.0 ? shrinkChild : child);
+    return SizedBox.expand(child: shrinkOffset == _dashbordMaxHeight ? shrinkChild : child);
   }
 
   @override
@@ -38,8 +41,8 @@ SliverPersistentHeader buildHeader(BuildContext context) {
   return SliverPersistentHeader(
     pinned: true,
     delegate: _SliverAppBarDelegate(
-        minHeight: 80.0,
-        maxHeight: 150.0,
+        minHeight: _dashbordMinHeight,
+        maxHeight: _dashbordMaxHeight,
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
