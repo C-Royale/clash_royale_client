@@ -11,7 +11,16 @@ class Overview extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10.0),
       child: Column(
-        children: <Widget>[ProfileItem(title: '奖杯'), ProfileItem(title: '战绩')],
+        children: <Widget>[
+          ProfileItem(
+            title: '奖杯',
+            subItems: [
+              CardSubItem(title: '最高杯数', value: '5022'),
+              CardSubItem(title: '当前杯数', value: '4100')
+            ],
+          ),
+          ProfileItem(title: '战绩')
+        ],
       ),
     );
   }
