@@ -1,12 +1,9 @@
-import 'package:clash_royale_client/model/player.dart';
-import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/utils/common_utils.dart';
 import 'package:clash_royale_client/views/home/battles.dart';
 import 'package:clash_royale_client/views/home/overview/overview.dart';
+import 'package:clash_royale_client/views/home/cards/cards.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 
 List tabs = ["概览", "卡组", "战绩"];
 
@@ -56,6 +53,7 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
             //       }
             //     }),
             Overview(),
+            Cards(),
             Container(
               alignment: Alignment.center,
               child: Text('卡组', textScaleFactor: 5),
