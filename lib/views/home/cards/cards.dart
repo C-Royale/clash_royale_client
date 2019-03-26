@@ -10,9 +10,17 @@ class Cards extends StatelessWidget {
       converter: (store) => store.state.player,
       builder: (BuildContext context, Player player) {
         return Container(
-          child: GridView.extent(
-            maxCrossAxisExtent: 120.0,
-            children: _buildImageItem(player.currentDeck),
+          padding: EdgeInsets.only(top: 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('当前卡组'),
+              GridView.extent(
+                shrinkWrap: true,
+                maxCrossAxisExtent: 120.0,
+                children: _buildImageItem(player.currentDeck),
+              ),
+            ],
           ),
         );
       },
@@ -22,6 +30,6 @@ class Cards extends StatelessWidget {
 
 List<Widget> _buildImageItem(List<CurrentDeck> currentDeck) {
   return currentDeck.map((CurrentDeck deck) {
-    return Image.network(deck.icon, fit: BoxFit.cover);
+    return Image.network(deck.icon, fit: BoxFit.fill);
   }).toList();
 }

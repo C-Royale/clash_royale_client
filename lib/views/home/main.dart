@@ -41,23 +41,8 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: [
-            // Temporary things
-            // StoreConnector<AppState, Player>(
-            //     distinct: true,
-            //     converter: (Store<AppState> store) => store.state.player,
-            //     builder: (_, player) {
-            //       if (player.name != null) {
-            //         return Text(player.name);
-            //       } else {
-            //         return Text('-');
-            //       }
-            //     }),
             Overview(),
             Cards(),
-            Container(
-              alignment: Alignment.center,
-              child: Text('卡组', textScaleFactor: 5),
-            ),
             Container(
               child: Battles(),
             )
