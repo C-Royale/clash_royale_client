@@ -2,6 +2,7 @@ import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class Cards extends StatelessWidget {
   @override
@@ -14,11 +15,14 @@ class Cards extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('当前卡组'),
-              GridView.extent(
+              Text(
+                '当前卡组',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              GridView.count(
                 shrinkWrap: true,
-                maxCrossAxisExtent: 120.0,
                 children: _buildImageItem(player.currentDeck),
+                crossAxisCount: 4,
               ),
             ],
           ),
@@ -30,6 +34,11 @@ class Cards extends StatelessWidget {
 
 List<Widget> _buildImageItem(List<CurrentDeck> currentDeck) {
   return currentDeck.map((CurrentDeck deck) {
-    return Image.network(deck.icon, fit: BoxFit.fill);
+    return Container(
+      margin: EdgeInsets.all(1.0),
+      decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+      child: FadeInImage.memoryNetwork(
+          image: deck.icon, fit: BoxFit.fill, placeholder: kTransparentImage),
+    );
   }).toList();
 }
