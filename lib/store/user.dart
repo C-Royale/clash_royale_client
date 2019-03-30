@@ -10,7 +10,6 @@ import 'package:redux_thunk/redux_thunk.dart';
 
 final playerReducer = combineReducers<Player>([
   TypedReducer<Player, UpdatePlayerAction>(_updateLoaded),
-  TypedReducer<Player, LoginAction>(_loginAction),
 ]);
 
 Player _updateLoaded(Player player, UpdatePlayerAction action) {
@@ -18,12 +17,7 @@ Player _updateLoaded(Player player, UpdatePlayerAction action) {
   return player;
 }
 
-Player _loginAction(Player player, LoginAction action) {
-  return player;
-}
-
-ThunkAction<AppState> getPlayerAndStoreThunk(
-    BuildContext context, String userTag) {
+ThunkAction<AppState> loginActionThunk(BuildContext context, String userTag) {
   return (Store<AppState> store) async {
     Response res = await player(userTag);
     Player user = Player.fromJson(res.data);
@@ -35,10 +29,13 @@ ThunkAction<AppState> getPlayerAndStoreThunk(
   };
 }
 
-class LoginAction {
-  LoginAction(Store<dynamic> store, BuildContext context, String userTag) {
-    store.dispatch(getPlayerAndStoreThunk(context, userTag));
-  }
+ThunkAction<AppState> updatePlayerThunk(BuildContext context, String userTag) {
+  return (Store<AppState> store) async {
+    Response res = await player(userTag);
+    Player user = Player.fromJson(res.data);
+
+    store.dispatch(UpdatePlayerAction(user));
+  };
 }
 
 class UpdatePlayerAction {

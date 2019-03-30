@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
-        _getStore()?.dispatch(LoginAction(_getStore(), context, userTag));
+        _getStore()?.dispatch(loginActionThunk(context, userTag));
       } catch (e) {
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text('User Tag Error' + e),

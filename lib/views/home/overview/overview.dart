@@ -1,6 +1,7 @@
 import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/state.dart';
 import 'package:clash_royale_client/store/user.dart';
+import 'package:clash_royale_client/utils/localstorage.dart';
 import 'package:clash_royale_client/views/home/overview/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -12,9 +13,15 @@ class Overview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, Player>(
-      converter: (store) => store.state.player,
-      builder: (context, player) {
+    return StoreConnector<AppState, _PlayerViewModel>(
+      converter: (store) => _PlayerViewModel(
+          player: store.state.player,
+          handerRefresh: () async {
+            String userTag = await LocalStorage.get('UserTag');
+            store.dispatch(updatePlayerThunk(context, userTag));
+            return null;
+          }),
+      builder: (context, vm) {
         return RefreshIndicator(
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
@@ -27,25 +34,26 @@ class Overview extends StatelessWidget {
                       subItems: [
                         CardSubItem(
                             title: '最高杯数',
-                            value: player.stats.maxTrophies.toString()),
+                            value: vm.player.stats.maxTrophies.toString()),
                         CardSubItem(
-                            title: '当前杯数', value: player.trophies.toString())
+                            title: '当前杯数', value: vm.player.trophies.toString())
                       ],
                     ),
                     ProfileItem(
                       title: '状态统计',
                       subItems: [
                         CardSubItem(
-                            title: '胜场次数', value: player.games.wins.toString()),
+                            title: '胜场次数',
+                            value: vm.player.games.wins.toString()),
                         CardSubItem(
                             title: '失败场次',
-                            value: player.games.losses.toString()),
+                            value: vm.player.games.losses.toString()),
                         CardSubItem(
                             title: '三冠场次',
-                            value: player.stats.threeCrownWins.toString()),
+                            value: vm.player.stats.threeCrownWins.toString()),
                         CardSubItem(
                             title: '捐献次数',
-                            value: player.stats.totalDonations.toString())
+                            value: vm.player.stats.totalDonations.toString())
                       ],
                     ),
                     ProfileItem(
@@ -53,10 +61,11 @@ class Overview extends StatelessWidget {
                       subItems: [
                         CardSubItem(
                             title: '胜场次数',
-                            value: player.games.warDayWins.toString()),
+                            value: vm.player.games.warDayWins.toString()),
                         CardSubItem(
                             title: '部落卡牌收集',
-                            value: player.stats.clanCardsCollected.toString())
+                            value:
+                                vm.player.stats.clanCardsCollected.toString())
                       ],
                     ),
                     ProfileItem(
@@ -64,23 +73,28 @@ class Overview extends StatelessWidget {
                       subItems: [
                         CardSubItem(
                             title: 'Max Wins',
-                            value: player.stats.challengeMaxWins.toString()),
+                            value: vm.player.stats.challengeMaxWins.toString()),
                         CardSubItem(
                             title: '卡牌获取',
-                            value: player.stats.challengeCardsWon.toString())
+                            value: vm.player.stats.challengeCardsWon.toString())
                       ],
                     )
                   ],
                 ),
               ),
             ),
-            onRefresh: _handlerRefresh);
+            onRefresh: vm.handerRefresh);
       },
     );
   }
 }
 
-Future<Null> _handlerRefresh() async {
-  await Future.delayed(Duration(seconds: 3));
-  return null;
+class _PlayerViewModel {
+  final Player player;
+  final void Function() handerRefresh;
+
+  _PlayerViewModel({
+    this.player,
+    this.handerRefresh,
+  });
 }
