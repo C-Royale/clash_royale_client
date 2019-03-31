@@ -1,11 +1,11 @@
 import 'package:clash_royale_client/utils/common_utils.dart';
-import 'package:clash_royale_client/views/home/battles.dart';
+import 'package:clash_royale_client/views/home/decks/deck.dart';
 import 'package:clash_royale_client/views/home/overview/overview.dart';
 import 'package:clash_royale_client/views/home/cards/cards.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
 
-List tabs = ["概览", "卡组", "战绩"];
+List tabs = ["概览", "卡组", "卡组"];
 
 typedef void GenerateQuote();
 
@@ -43,9 +43,7 @@ class _HomeState extends State<HomeState> with SingleTickerProviderStateMixin {
           children: [
             Overview(),
             Cards(),
-            Container(
-              child: Battles(),
-            )
+            Decks()
           ],
         ),
         drawer: Navbar());
