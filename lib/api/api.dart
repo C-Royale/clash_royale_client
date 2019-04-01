@@ -44,7 +44,17 @@ Future<Response> playerChests(String id,
 
 // Top 200 Players
 Future<Response> topPlayers({Options options, CancelToken cancelToken}) async {
-  Response response =
-      await http.get('top/players', options: options, cancelToken: cancelToken);
+  Response response = await http.get('/top/players',
+      options: options, cancelToken: cancelToken);
+  return response;
+}
+
+// Popular Decks
+Future<Response> popularDecks(
+    {Options options, CancelToken cancelToken}) async {
+  Response response = await http.get('/popular/decks',
+      options: options,
+      cancelToken: cancelToken,
+      queryParameters: {"max": 10, "page": 0});
   return response;
 }

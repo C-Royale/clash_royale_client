@@ -1,3 +1,4 @@
+import 'package:clash_royale_client/model/home_state.dart';
 import 'package:clash_royale_client/model/player.dart';
 import 'package:clash_royale_client/store/redux.dart';
 import 'package:clash_royale_client/store/state.dart';
@@ -17,7 +18,10 @@ Future<Store<AppState>> createStore() async {
   return new Store(
     appReducer,
     initialState: initialState ??
-        AppState(player: Player.empty(), locale: Locale('zh', 'CH')),
+        AppState(
+            player: Player.empty(),
+            locale: Locale('zh', 'CH'),
+            homeState: HomeState.initial()),
     middleware: [thunkMiddleware, persistor.createMiddleware()],
   );
 }
