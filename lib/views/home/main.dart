@@ -5,7 +5,7 @@ import 'package:clash_royale_client/views/home/cards/cards.dart';
 import 'package:clash_royale_client/views/navbar.dart';
 import 'package:flutter/material.dart';
 
-List tabs = ["概览", "卡组", "卡组"];
+List tabs = ["概览", "卡组", "Decks"];
 
 typedef void GenerateQuote();
 
