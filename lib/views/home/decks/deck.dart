@@ -18,11 +18,11 @@ class _DecksState extends State<Decks>
     return StoreConnector<AppState, List<Deck>>(
         onInit: (store) => store.dispatch(getDecksThunk()),
         converter: (store) => store.state.homeState.decks,
-        builder: (BuildContext context, decks) {
+        builder: (BuildContext context, List<Deck> decks) {
           return Container(
             child: ListView.builder(
               padding: EdgeInsets.only(bottom: 15.0),
-              itemCount: decks.length,
+              itemCount: decks?.length ?? [],
               itemBuilder: (BuildContext context, int index) {
                 return GridView.count(
                   shrinkWrap: true,

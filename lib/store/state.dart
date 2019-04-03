@@ -28,5 +28,5 @@ class AppState {
           : HomeState.initial());
 
   dynamic toJson() =>
-      {'player': player, 'locale': locale.toString(), 'homeState': player};
+      {'player': player, 'locale': locale.toString(), 'homeState': homeState};
 }
