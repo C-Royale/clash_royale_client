@@ -1,5 +1,6 @@
 import 'package:clash_royale_client/router/router.dart';
 import 'package:clash_royale_client/utils/common_utils.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
 class Navbar extends StatelessWidget {
@@ -21,7 +22,8 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.perm_identity),
             onTap: () {
               Navigator.of(context).pop();
-              Routes.router.navigateTo(context, "/profile");
+              Routes.router.navigateTo(context, "/profile",
+                  transition: TransitionType.native);
             },
           ),
           ListTile(
@@ -29,7 +31,8 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.people),
             onTap: () {
               Navigator.of(context).pop();
-              Routes.router.navigateTo(context, "/clan");
+              Routes.router.navigateTo(context, "/clan",
+                  transition: TransitionType.native);
             },
           ),
           ListTile(
@@ -37,7 +40,8 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.confirmation_number),
             onTap: () {
               Navigator.of(context).pop();
-              Routes.router.navigateTo(context, "/arena");
+              Routes.router.navigateTo(context, "/arena",
+                  transition: TransitionType.native);
             },
           ),
           ListTile(
@@ -54,7 +58,8 @@ class Navbar extends StatelessWidget {
             trailing: new Icon(Icons.settings),
             onTap: () {
               Navigator.of(context).pop();
-              Routes.router.navigateTo(context, "/setting");
+              Routes.router.navigateTo(context, "/setting",
+                  transition: TransitionType.native);
             },
           ),
         ],
