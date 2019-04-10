@@ -9,16 +9,16 @@ class LocalizationsWidget extends StatefulWidget {
 
   @override
   State<LocalizationsWidget> createState() {
-    return new _LocalizationsWidget();
+    return _LocalizationsWidget();
   }
 }
 
 class _LocalizationsWidget extends State<LocalizationsWidget> {
   @override
   Widget build(BuildContext context) {
-    return new StoreBuilder<AppState>(builder: (context, store) {
+    return StoreBuilder<AppState>(builder: (context, store) {
       ///通过 StoreBuilder 和 Localizations 实现实时多语言切换
-      return new Localizations.override(
+      return Localizations.override(
         context: context,
         locale: store.state.locale,
         child: widget.child,

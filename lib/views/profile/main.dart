@@ -32,10 +32,10 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       key: _scaffoldKey,
-      appBar: new AppBar(
-        title: new Text('个人战绩'),
+      appBar: AppBar(
+        title: Text('个人战绩'),
       ),
       body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -44,7 +44,7 @@ class _ProfileState extends State<Profile> {
               physics: AlwaysScrollableScrollPhysics(),
               child: Container(
                 child: Center(
-                  child: Text('个人战绩', style: new TextStyle(fontSize: 24.0)),
+                  child: Text('个人战绩', style: TextStyle(fontSize: 24.0)),
                 ),
                 height: MediaQuery.of(context).size.height,
               ))),

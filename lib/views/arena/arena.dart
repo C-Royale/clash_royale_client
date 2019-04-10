@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Arena extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -25,12 +25,12 @@ class Arena extends StatelessWidget {
           )),
           SliverPadding(
             padding: const EdgeInsets.all(5.0),
-            sliver: new SliverGrid(
+            sliver: SliverGrid(
               //Grid
-              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
               ),
-              delegate: new SliverChildBuilderDelegate(
+              delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return Card(
                     elevation: 5.0,

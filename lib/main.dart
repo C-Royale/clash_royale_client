@@ -32,14 +32,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
         store: store,
-        child: new DynamicTheme(
+        child: DynamicTheme(
             defaultBrightness: Brightness.light,
-            data: (brightness) => new ThemeData(
+            data: (brightness) => ThemeData(
                   primarySwatch: Colors.indigo,
                   brightness: brightness,
                 ),
             themedWidgetBuilder: (context, theme) {
-              return new MaterialApp(
+              return MaterialApp(
                   title: 'Flutter Demo',
                   theme: theme,
                   onGenerateRoute: Routes.router.generator,

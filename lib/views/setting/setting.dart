@@ -12,16 +12,16 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(CommonUtils.getLocale(context).setting_title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(CommonUtils.getLocale(context).setting_title),
       ),
-      body: new Center(
+      body: Center(
         child: ListView(children: <Widget>[
           ThemeSetting(),
           ListTile(
             leading: const Icon(Icons.language),
-            title: new Text(CommonUtils.getLocale(context).setting_language),
+            title: Text(CommonUtils.getLocale(context).setting_language),
             trailing: PopupMenuButton<int>(
                 onSelected: (int value) {
                   CommonUtils.changeLocale(StoreProvider.of(context), value);
@@ -73,8 +73,8 @@ class _ThemeSettingState extends State<ThemeSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return new SwitchListTile(
-        title: new Text(CommonUtils.getLocale(context).setting_theme),
+    return SwitchListTile(
+        title: Text(CommonUtils.getLocale(context).setting_theme),
         secondary: const Icon(Icons.brightness_medium),
         value: _value,
         onChanged: (bool value) {
@@ -88,10 +88,10 @@ void _showDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: new Text("确认退出？"),
+        title: Text("确认退出？"),
         actions: <Widget>[
-          new FlatButton(
-            child: new Text(
+          FlatButton(
+            child: Text(
               "取消",
               style: TextStyle(color: Colors.grey),
             ),
@@ -99,8 +99,8 @@ void _showDialog(BuildContext context) {
               Navigator.of(context).pop();
             },
           ),
-          new FlatButton(
-            child: new Text("确认"),
+          FlatButton(
+            child: Text("确认"),
             onPressed: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.remove('UserTag');

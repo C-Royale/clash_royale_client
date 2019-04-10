@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: new Builder(builder: (BuildContext context) {
+    return Scaffold(body: Builder(builder: (BuildContext context) {
       return SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                               _usertagController.clear();
                             },
                           ),
-                          new StoreBuilder<AppState>(builder: (context, store) {
+                          StoreBuilder<AppState>(builder: (context, store) {
                             return RaisedButton(
                               child: Text('Next'),
                               color: Colors.blue,

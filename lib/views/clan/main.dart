@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class Clan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('部落'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('部落'),
       ),
-      body: new Center(
-        child: new Text('部落', style: new TextStyle(fontSize: 24.0)),
+      body: Center(
+        child: Text('部落', style: TextStyle(fontSize: 24.0)),
       ),
     );
   }
