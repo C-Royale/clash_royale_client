@@ -9,37 +9,37 @@ import 'package:clash_royale_client/views/setting/setting.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
-var rootHandler = new Handler(
+var rootHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return new MainPage();
+  return MainPage();
 });
 
-var loginRouteHandler = new Handler(
+var loginRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: LoginPage());
 });
 
-var homeRouteHandler = new Handler(
+var homeRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: HomeState());
 });
 
-var profileRouteHandler = new Handler(
+var profileRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: Profile());
 });
 
-var settingRouteHandler = new Handler(
+var settingRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: Setting());
 });
 
-var clanRouteHandler = new Handler(
+var clanRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: Clan());
 });
 
-var arenaRouteHandler = new Handler(
+var arenaRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LocalizationsWidget(child: Arena());
 });
